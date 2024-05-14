@@ -1,0 +1,29 @@
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0px 0px 15px 5px #ddd;
+  width: 350px;
+  height: 185px;
+}
+.card__header {
+  font-size: 20px;
+  padding-bottom: 15px;
+}
+.card__id {
+  padding-bottom: 15px;
+  padding-top: 15px;
+  color: #868282;
+}
+.card__footer {
+  display: flex;
+  justify-content: space-between;
+}
+.card__price {
+  font-size: 20px;
+}
+.card__button {
+  color: #0778ea;
+}
+
+/*# sourceMappingURL=style.css.map */

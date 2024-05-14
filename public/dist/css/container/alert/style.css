@@ -1,0 +1,32 @@
+.info {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 16px;
+}
+.info__content {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0px 0px 15px 5px #ddd;
+  display: flex;
+  justify-content: space-between;
+  width: 1000px;
+}
+.info__title {
+  font-size: 16px;
+  padding-top: 8px;
+  padding-left: 60px;
+}
+.info__button {
+  border: 1px solid #ddd;
+  padding: 8px;
+  border-radius: 7px;
+  background: #0778ea;
+  color: aliceblue;
+  width: 650px;
+  text-align: center;
+  text-decoration: none;
+}
+
+/*# sourceMappingURL=style.css.map */

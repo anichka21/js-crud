@@ -1,0 +1,74 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 16px;
+}
+.form__title {
+  font-size: 20px;
+  font-weight: bold;
+  padding-bottom: 4px;
+  color: #0778ea;
+}
+.form__content {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0px 0px 15px 5px #ddd;
+}
+.form__card {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+.form__name {
+  font-size: 20px;
+}
+.form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 10px;
+  color: #868282;
+}
+.form__label {
+  font-size: 14px;
+}
+.form__input_1 {
+  border: 1px solid #ddd;
+  padding: 8px;
+  width: 700px;
+  border-radius: 5px;
+}
+.form__input_2 {
+  border: 1px solid #ddd;
+  padding: 24px;
+  border-radius: 5px;
+}
+.form__info {
+  font-size: 10px;
+  padding-bottom: 4px;
+  color: rgb(103, 101, 101);
+}
+.form__1button {
+  border: 1px solid #ddd;
+  padding: 8px;
+  border-radius: 5px;
+  background: #0778ea;
+  color: aliceblue;
+  width: 700px;
+}
+.form__twoButton {
+  display: flex;
+  justify-content: space-between;
+}
+.form__2button {
+  background: red;
+  color: aliceblue;
+  width: 700px;
+  border: 1px solid #ddd;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+/*# sourceMappingURL=style.css.map */
