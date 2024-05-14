@@ -12,5 +12,41 @@
         padding-bottom: s.space(1);
         color: s.color("second");
     }
+
+    &__a {
+        font-size: s.space(5);
+    }
 }
 
+.card {
+    border: 1px solid s.color('light');
+    border-radius: 8px;
+    padding: s.space(6);
+    box-shadow: 0px 0px 15px 5px s.color('light');
+    width: 350px;
+    height: 185px;
+
+    &__header {
+        font-size: s.space(5);
+        padding-bottom: 15px;
+    }
+
+    &__id {
+        padding-bottom: 15px;
+        padding-top: 15px;
+        color: s.color('text');
+    }
+
+    &__footer {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__price {
+        font-size: s.space(5);
+    }
+
+    &__button {
+        color: s.color('second')
+    }
+}
