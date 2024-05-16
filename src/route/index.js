@@ -20,6 +20,8 @@ class Product {
   static getList = () => this.#list
 
   static getById = (id) => this.#list.find((product) => product.id === id)
+
+
 }
 
 // ================================================================
@@ -37,8 +39,6 @@ router.get('/', function (req, res) {
   })
   // ↑↑ сюди вводимо JSON дані
 })
-
-// ================================================================
 
 // ================================================================
 
@@ -114,12 +114,30 @@ router.get('/product-list', function (req, res) {
 router.get('/product-edit', function (req, res) {
   // res.render генерує нам HTML сторінку
   const {id} = req.query
+  const product = Product.getById(Number(id))
+
+  if(!product) {
+    res.render('alert', {
+      style: 'alert',
+      isError: true,
+      title: 'Помилка',
+      alert: 'Товар з таким ID не знайдено'
+    })
+  }
+  else {
 
   // ↙️ cюди вводимо назву файлу з сontainer
   res.render('product-edit', {
     // вказуємо назву папки контейнера, в якій знаходяться наші стилі
     style: 'product-edit',
-  })
+
+    data: {
+      name: product.name,
+      price: product.price,
+      id: product.id,
+      description: product.description
+    }
+  })}
   // ↑↑ сюди вводимо JSON дані
 })
 

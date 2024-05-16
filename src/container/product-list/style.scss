@@ -47,6 +47,7 @@
     }
 
     &__button {
-        color: s.color('second')
+        color: s.color('second');
+        text-decoration: none;
     }
 }
