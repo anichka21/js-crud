@@ -13,15 +13,40 @@ class Product {
     this.id = new Date().getTime()
   }
 
-  static add = (product) => {
-    this.#list.push(product)
+  verifyId = (id) => this.id === id
+
+  static add = ({name, price, description}) => {this.#list.push(new Product(name, price, description))
   }
 
   static getList = () => this.#list
 
   static getById = (id) => this.#list.find((product) => product.id === id)
 
+  static updateById = (id, data) => {
+    const product = this.getById(id);
 
+    if(product) {
+      this.update(product, data)
+      return true
+    }
+    else {
+      return false
+    }
+  }
+
+  static deleteById = (id) => {
+    const index = this.#list.findIndex(
+      (product) => product.id === id
+    )
+
+    if(index !== -1) {
+      this.#list.splice(index, 1)
+      return true
+    }
+    else {
+      return false
+    }
+  }
 }
 
 // ================================================================
@@ -140,6 +165,81 @@ router.get('/product-edit', function (req, res) {
   })}
   // ↑↑ сюди вводимо JSON дані
 })
+
+// ================================================================
+
+// router.get Створює нам один ентпоїнт
+
+// ↙️ тут вводимо шлях (PATH) до сторінки
+router.post('/product-edit', function (req, res) {
+  // res.render генерує нам HTML сторінку
+  const {name, price, description, id} = req.body
+
+  let result = false;
+  const product = Product.getById(Number(id))
+
+  if(product.verifyId(id)) {
+    Product.update(product, {name}, {price}, {description})
+    result = true
+  }
+
+  // ↙️ cюди вводимо назву файлу з сontainer
+  res.render('product-edit', {
+    // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+    style: 'product-edit',
+    alert: result? 'Товар оновлено' : 'Сталась помилка'
+  })
+  // ↑↑ сюди вводимо JSON дані
+})
+
+// ================================================================
+
+// router.get Створює нам один ентпоїнт
+
+// ↙️ тут вводимо шлях (PATH) до сторінки
+router.post('/product-update', function (req, res) {
+  // res.render генерує нам HTML сторінку
+  const {name, price, description, id} = req.body
+
+  let result = false;
+  const product = Product.getById(Number(id))
+
+  if(product.verifyId(id)) {
+    Product.update(product, {name}, {price}, {description})
+    result = true
+  }
+
+  // ↙️ cюди вводимо назву файлу з сontainer
+  res.render('product-edit', {
+    // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+    style: 'product-edit',
+    alert: result? 'Товар оновлено' : 'Сталась помилка'
+  })
+  // ↑↑ сюди вводимо JSON дані
+})
+
+// ================================================================// ================================================================
+
+// router.get Створює нам один ентпоїнт
+
+// ↙️ тут вводимо шлях (PATH) до сторінки
+router.get('/product-delete', function (req, res) {
+  // res.render генерує нам HTML сторінку
+  const {id} = req.query
+  Product.deleteById(Number(id))
+
+  // ↙️ cюди вводимо назву файлу з сontainer
+  res.render('product-edit', {
+    // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+    style: 'product-edit',
+    alert: 'Товар видалений'
+  })
+  // ↑↑ сюди вводимо JSON дані
+})
+
+// ================================================================
+
+// ================================================================
 
 // ================================================================
 
