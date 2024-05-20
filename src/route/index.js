@@ -34,6 +34,12 @@ class Product {
     }
   }
 
+  static update = (product, {id}) => {
+    if(id) {
+      product.id = id
+    }
+  }
+
   static deleteById = (id) => {
     const index = this.#list.findIndex(
       (product) => product.id === id
@@ -171,32 +177,6 @@ router.get('/product-edit', function (req, res) {
 // router.get Створює нам один ентпоїнт
 
 // ↙️ тут вводимо шлях (PATH) до сторінки
-router.post('/product-edit', function (req, res) {
-  // res.render генерує нам HTML сторінку
-  const {name, price, description, id} = req.body
-
-  let result = false;
-  const product = Product.getById(Number(id))
-
-  if(product.verifyId(id)) {
-    Product.update(product, {name}, {price}, {description})
-    result = true
-  }
-
-  // ↙️ cюди вводимо назву файлу з сontainer
-  res.render('product-edit', {
-    // вказуємо назву папки контейнера, в якій знаходяться наші стилі
-    style: 'product-edit',
-    alert: result? 'Товар оновлено' : 'Сталась помилка'
-  })
-  // ↑↑ сюди вводимо JSON дані
-})
-
-// ================================================================
-
-// router.get Створює нам один ентпоїнт
-
-// ↙️ тут вводимо шлях (PATH) до сторінки
 router.post('/product-update', function (req, res) {
   // res.render генерує нам HTML сторінку
   const {name, price, description, id} = req.body
@@ -210,15 +190,15 @@ router.post('/product-update', function (req, res) {
   }
 
   // ↙️ cюди вводимо назву файлу з сontainer
-  res.render('product-edit', {
+  res.render('alert', {
     // вказуємо назву папки контейнера, в якій знаходяться наші стилі
-    style: 'product-edit',
-    alert: result? 'Товар оновлено' : 'Сталась помилка'
+    style: 'alert',
+    alert: result ? 'Товар оновлено' : 'Сталась помилка',
   })
   // ↑↑ сюди вводимо JSON дані
 })
 
-// ================================================================// ================================================================
+// ================================================================
 
 // router.get Створює нам один ентпоїнт
 
@@ -229,9 +209,9 @@ router.get('/product-delete', function (req, res) {
   Product.deleteById(Number(id))
 
   // ↙️ cюди вводимо назву файлу з сontainer
-  res.render('product-edit', {
+  res.render('alert', {
     // вказуємо назву папки контейнера, в якій знаходяться наші стилі
-    style: 'product-edit',
+    style: 'alert',
     alert: 'Товар видалений'
   })
   // ↑↑ сюди вводимо JSON дані

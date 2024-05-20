@@ -29,7 +29,7 @@
         </div>
         <div class="form__twoButton">
         <button class="form__1button">Зберегти оновлення</button>
-        <a href="/product-edit?id={{id}}" class="form__2button">Видалити товар</a>
+        {{#with data}}<a href="/product-delete?id={{id}}" class="form__2button">Видалити товар</a>{{/with}}
         </div>
       </div>
       </form>
