@@ -3,6 +3,10 @@ const express = require('express')
 // Cтворюємо роутер - місце, куди ми підключаємо ендпоїнти
 const router = express.Router()
 
+class Purchase {
+
+}
+
 // ================================================================
 
 // router.get Створює нам один ентпоїнт
