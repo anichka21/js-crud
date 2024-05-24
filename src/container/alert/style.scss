@@ -1,8 +1,34 @@
 @use '../../lib/service.scss' as s;
-
 .card {
-    border: 1px solid s.color('light');
-    padding: s.space(2);
-    border-radius: 20px;
-    box-shadow: 5px 5px 0px 0px s.color('light');
+    display: flex;
+    flex-direction: column;
+    padding: s.space(4);
+    gap: s.space(4);
+
+    &__header {
+        border: 1px solid s.color('light');
+        border-radius: 8px;
+        padding: s.space(4);
+        box-shadow: 0px 0px 15px 5px s.color('light');
+        display: flex;
+        justify-content: space-between;
+        width: 1000px;
+    }
+
+    &__title {
+        font-size: s.space(4);
+        padding-top: s.space(2);
+        padding-left: s.space(15);
+    }
+
+    &__button {
+        border: 1px solid s.color('light');
+        padding: s.space(2);
+        border-radius: 7px;     
+        background: s.color('second');
+        color: aliceblue;
+        width: 650px;
+        text-align: center;
+        text-decoration: none;
+    }
 }
