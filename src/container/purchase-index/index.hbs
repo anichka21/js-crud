@@ -3,11 +3,20 @@
 в якому міститься код, котрий буде віддаватися по шляху (PATH) - "/"
  }}
 
-{{#with data}}
-  <div>
-    {{>purchase-product}}
+<main>
+  <div class="header">
+    <h1 class="header__title">Товари</h1>
+    <small class="header__info">Комп'ютери та ноутбуки/Комп'ютери, неттопи, моноблоки</small>
   </div>
-{{/with}}
+
+  <section>
+    <div class="card">
+      {{#each data.list}}       
+          {{>purchase-product data=this}}
+      {{/each}}
+    </div>
+  </section>
+</main>
 
 {{! 
     Цей код містить лише те, що буде виводитись в <body>

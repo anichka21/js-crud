@@ -1,4 +1,10 @@
-<main class="main">
-    <h1 class="title">Товари</h1>
-    <small class="info">Комп'ютери та ноутбуки/Комп'ютери, неттопи, моноблоки</small>
-</main>
+<section class="product">
+    <img src="/img/png.png" alt="" class="product__png">
+    <h2 class="product__title">
+        {{title}}
+    </h2>
+    <div class="product__description">{{description}}</div>
+    <div class="product__category1">{{category1}}</div>
+    <div class="product__category2">{{category2}}</div>
+    <a href='/purchase-product?id={{id}}' class="product__price">Купити зараз: {{price}}</a>
+</section>
