@@ -3,11 +3,25 @@
 в якому міститься код, котрий буде віддаватися по шляху (PATH) - "/"
  }}
 
-<main>
+<main class="main">
   <div class="header">
-    <h1 class="header__title">інші товари</h1>
+    <h1 class="header__title">Інші товари</h1>
     <small class="header__info">Комп'ютери та ноутбуки</small>
   </div>
+
+{{#with data.product}}
+  <form method="POST" action="/purchase-create?id={{id}}">
+    <div class="product-info">
+      <img src="{{img}}" alt="Товар 1" class="product-info__image">
+      <h2 class="product-info__title">{{title}}</h2>
+      <p class="product-info__subtitle">{{description}}</p>
+      <div class="product-info__divider"></div>
+      <div class="product-info__divider"></div>
+      {{> field label="Кількість" type="number" name="amount" value="1"}}
+      <button href="/purchase-product?id={{id}}" class="product-info__button">Купити зараз:</button>
+    </div>
+  </form>
+{{/with}}
 
   <section>
     <div class="card">

@@ -131,9 +131,9 @@ router.get('/purchase-product', function (req, res) {
   const id = Number(req.query.id)
 
   // ↙️ cюди вводимо назву файлу з сontainer
-  res.render('purchase-index', {
+  res.render('purchase-product', {
     // вказуємо назву папки контейнера, в якій знаходяться наші стилі
-    style: 'purchase-index',
+    style: 'purchase-product',
     data: {
       list: Product.getRandomList(id),
       product: Product.getById(id),
