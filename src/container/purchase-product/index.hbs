@@ -4,32 +4,41 @@
  }}
 
 <main class="main">
-  <div class="header">
-    <h1 class="header__title">Інші товари</h1>
-    <small class="header__info">Комп'ютери та ноутбуки</small>
-  </div>
+
+<div class="header">
+    <h1 class="header__title">Інформація про товар</h1>
+</div>
 
 {{#with data.product}}
   <form method="POST" action="/purchase-create?id={{id}}">
     <div class="product-info">
-      <img src="{{img}}" alt="Товар 1" class="product-info__image">
+      <img src="/img/png.png" alt="Товар 1" class="product-info__image">
       <h2 class="product-info__title">{{title}}</h2>
       <p class="product-info__subtitle">{{description}}</p>
-      <div class="product-info__divider"></div>
-      <div class="product-info__divider"></div>
+      {{> divider}}
+
+      <div class="product-info__category1">{{category1}}</div>
+      <div class="product-info__category2">{{category2}}</div>
+
+      {{> divider}}
       {{> field label="Кількість" type="number" name="amount" value="1"}}
-      <button href="/purchase-product?id={{id}}" class="product-info__button">Купити зараз:</button>
+      <button class="product-info__button">Купити зараз: {{price}}грн</button>
     </div>
   </form>
 {{/with}}
 
-  <section>
-    <div class="card">
-      {{#each data.list}}       
-          {{>purchase-product data=this}}
-      {{/each}}
-    </div>
-  </section>
+<div class="header">
+    <h1 class="header__title">Інші товари</h1>
+    <small class="header__info">Комп'ютери та ноутбуки</small>
+</div>
+
+<section>
+  <div class="card">
+    {{#each data.list}}       
+        {{>purchase-product data=this}}
+    {{/each}}
+  </div>
+</section>
 </main>
 
 {{! 

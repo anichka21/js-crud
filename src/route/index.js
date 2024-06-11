@@ -144,5 +144,38 @@ router.get('/purchase-product', function (req, res) {
 
 // ================================================================
 
+// ↙️ тут вводимо шлях (PATH) до сторінки
+router.get('/purchase-create', function (req, res) {
+  // res.render генерує нам HTML сторінку
+
+  const id = Number(req.query.id)
+  const amount = Number(req.body.amount)
+  console.log(id, amount)
+
+  if (amount < 1) {
+    return res.render('alert', {
+      style: 'alert',
+      data: {
+        message:'Помилка',
+        info: 'Некоректна кількість товару',
+        link: '/purchase-product?id=${id}'
+      },
+    })
+  }
+
+  // ↙️ cюди вводимо назву файлу з сontainer
+  res.render('purchase-product', {
+    // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+    style: 'purchase-product',
+    data: {
+      list: Product.getRandomList(id),
+      product: Product.getById(id),
+    },
+  })
+  // ↑↑ сюди вводимо JSON дані
+})
+
+// ================================================================
+
 // Підключаємо роутер до бек-енду
 module.exports = router
