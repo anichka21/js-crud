@@ -7,13 +7,14 @@ class Product {
   static #list = []
   static #count = 0
 
-  constructor(title, description, category1, category2, price) {
+  constructor(title, description, category1, category2, price, amount = 0) {
     this.id = ++Product.#count
     this.title = title
     this.description = description
     this.category1 = category1
     this.category2 = category2
     this.price = price
+    this.amount = amount;
   }
 
   static add = (
@@ -145,11 +146,25 @@ router.get('/purchase-product', function (req, res) {
 // ================================================================
 
 // ↙️ тут вводимо шлях (PATH) до сторінки
-router.get('/purchase-create', function (req, res) {
+router.post('/purchase-create', function (req, res) {
   // res.render генерує нам HTML сторінку
 
-  const id = Number(req.query.id)
+  const id = Number(req.body.id)
   const amount = Number(req.body.amount)
+
+  const product = Product.getById(id)
+
+  if (product.amount < 1) {
+    return res.render('alert', {
+      style: 'alert',
+      data: {
+        message:'Помилка',
+        info: 'Такої кількості товару немає в наявності',
+        link: '/purchase-product?id=${id}'
+      },
+    })
+  }
+
   console.log(id, amount)
 
   if (amount < 1) {
