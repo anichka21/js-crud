@@ -17,19 +17,8 @@ class Product {
     this.amount = amount;
   }
 
-  static add = (
-    title,
-    description,
-    category1,
-    category2,
-    price
-  ) => {
-    const newProduct = new Product (
-      title,
-      description,
-      category1,
-      category2,
-      price,
+  static add = (...data) => {
+    const newProduct = new Product (...data
     )
 
     this.#list.push(newProduct)
@@ -63,6 +52,7 @@ Product.add(
   'Готовий до відправки',
   'Топ продажів',
   20500,
+  10
 )
 
 Product.add(
@@ -71,6 +61,7 @@ Product.add(
   'Готовий до відправки',
   'Топ продажів',
   23400,
+  10
 )
 
 Product.add(
@@ -79,7 +70,12 @@ Product.add(
   'Готовий до відправки',
   'Топ продажів',
   29000,
+  10
 )
+
+class Purchase {
+  static DELIVERY_PRICE = 150
+}
 
 
 
@@ -152,6 +148,17 @@ router.post('/purchase-create', function (req, res) {
   const id = Number(req.body.id)
   const amount = Number(req.body.amount)
 
+  if (amount < 1) {
+    return res.render('alert', {
+      style: 'alert',
+      data: {
+        message:'Помилка',
+        info: 'Некоректна кількість товару',
+        link: '/purchase-product?id=${id}'
+      },
+    })
+  }
+
   const product = Product.getById(id)
 
   if (product.amount < 1) {
@@ -165,32 +172,55 @@ router.post('/purchase-create', function (req, res) {
     })
   }
 
-  console.log(id, amount)
+  console.log(product, amount)
 
-  if (amount < 1) {
-    return res.render('alert', {
-      style: 'alert',
-      data: {
-        message:'Помилка',
-        info: 'Некоректна кількість товару',
-        link: '/purchase-product?id=${id}'
-      },
-    })
-  }
-
-  // ↙️ cюди вводимо назву файлу з сontainer
-  res.render('purchase-product', {
-    // вказуємо назву папки контейнера, в якій знаходяться наші стилі
-    style: 'purchase-product',
-    data: {
-      list: Product.getRandomList(id),
-      product: Product.getById(id),
-    },
-  })
-  // ↑↑ сюди вводимо JSON дані
+  const productPrice = product.price * amount
+  const totalPrice = productPrice + Purchase.DELIVERY_PRICE
 })
 
 // ================================================================
+
+// ↙️ cюди вводимо назву файлу з сontainer
+res.render('purchase-create', {
+  // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+  style: 'purchase-create',
+  data: {
+    id: product.id,
+
+    cart: [
+      {
+      text: '${product.title} (${amount} шт)', 
+      price: productPrice,
+      },
+      {
+        text: 'Доставка', 
+        price: Purchase.DELIVERY_PRICE,
+      }
+    ],
+    totalPrice,
+    productPrice,
+    deliveryPrice: Purchase.DELIVERY_PRICE,
+  },
+})
+
+// ================================================================
+
+// ↙️ cюди вводимо назву файлу з сontainer
+router.post('/purchase-submit', function (req, res){
+  // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+  console.log(req.query)
+  console.log(req.body)
+
+  res.render(alert, {
+    style: 'alert',
+
+    dsts: {
+      message: 'Успішно',
+      info: 'Замовлення створено',
+      link: '/purchase-list',
+    }
+  })
+})
 
 // Підключаємо роутер до бек-енду
 module.exports = router
